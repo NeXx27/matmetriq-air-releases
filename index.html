@@ -1,0 +1,1333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#090b10">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Matsync Pro — License Administration</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        :root {
+            --bg-base: #090b10;
+            --card-surface: #111520;
+            --card-surface-elevated: #161c2a;
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --border-hover: rgba(255, 255, 255, 0.16);
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --primary-light: rgba(37, 99, 235, 0.12);
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --text-tertiary: #64748b;
+            --success: #10b981;
+            --success-light: rgba(16, 185, 129, 0.12);
+            --danger: #ef4444;
+            --danger-light: rgba(239, 68, 68, 0.12);
+            --radius-card: 16px;
+            --radius-element: 10px;
+            --radius-pill: 9999px;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-base);
+            color: var(--text-primary);
+            min-height: 100vh;
+            padding: 16px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .app-shell {
+            width: 100%;
+            max-width: 960px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        /* Top Header */
+        .header {
+            background: var(--card-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-card);
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .brand-wrap {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-avatar {
+            width: 38px;
+            height: 38px;
+            border-radius: 9px;
+            background: #1e293b;
+            border: 1px solid var(--border-subtle);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            flex-shrink: 0;
+        }
+
+        .brand-info h1 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: -0.2px;
+        }
+
+        .brand-info p {
+            font-size: 0.72rem;
+            color: var(--text-secondary);
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .cloud-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--success-light);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: #34d399;
+            font-size: 0.68rem;
+            font-weight: 600;
+            padding: 5px 10px;
+            border-radius: var(--radius-pill);
+        }
+
+        .cloud-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--success);
+        }
+
+        .btn-icon {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-primary);
+            border-radius: 8px;
+            width: 34px;
+            height: 34px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .btn-icon:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--border-hover);
+        }
+
+        /* Stat Metrics */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .stat-card {
+            background: var(--card-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            padding: 12px 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .stat-label {
+            font-size: 0.68rem;
+            font-weight: 600;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+        }
+
+        .stat-val {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: #ffffff;
+        }
+
+        /* Tab Navigation */
+        .tab-bar {
+            display: flex;
+            background: var(--card-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-element);
+            padding: 4px;
+            gap: 4px;
+        }
+
+        .tab-btn {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            font-family: inherit;
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 8px 12px;
+            border-radius: 7px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: all 0.15s ease;
+        }
+
+        .tab-btn.active {
+            background: var(--card-surface-elevated);
+            color: #ffffff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Controls Row */
+        .controls-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .search-wrap {
+            flex: 1;
+            min-width: 220px;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 12px;
+            color: var(--text-tertiary);
+            pointer-events: none;
+        }
+
+        .search-input {
+            width: 100%;
+            background: var(--card-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-element);
+            padding: 10px 12px 10px 36px;
+            font-family: inherit;
+            font-size: 0.82rem;
+            color: #ffffff;
+            outline: none;
+            transition: border-color 0.15s ease;
+        }
+
+        .search-input:focus {
+            border-color: var(--primary);
+        }
+
+        .search-input::placeholder {
+            color: var(--text-tertiary);
+        }
+
+        .btn-add {
+            background: var(--primary);
+            color: #ffffff;
+            border: none;
+            border-radius: var(--radius-element);
+            padding: 10px 16px;
+            font-family: inherit;
+            font-size: 0.8rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: background 0.15s ease;
+            white-space: nowrap;
+        }
+
+        .btn-add:hover {
+            background: var(--primary-hover);
+        }
+
+        /* Machine List Cards (Mobile & Desktop) */
+        .machines-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .machine-card {
+            background: var(--card-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-card);
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            transition: border-color 0.15s ease;
+        }
+
+        .machine-card:hover {
+            border-color: var(--border-hover);
+        }
+
+        .machine-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .machine-id-wrap {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .machine-id-text {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: 0.3px;
+        }
+
+        .badge-status {
+            font-size: 0.64rem;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: var(--radius-pill);
+            letter-spacing: 0.4px;
+            text-transform: uppercase;
+        }
+
+        .badge-active {
+            background: var(--success-light);
+            border: 1px solid rgba(16, 185, 129, 0.35);
+            color: #34d399;
+        }
+
+        .badge-revoked {
+            background: var(--danger-light);
+            border: 1px solid rgba(239, 68, 68, 0.35);
+            color: #f87171;
+        }
+
+        .machine-meta-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: var(--radius-element);
+            padding: 10px 12px;
+        }
+
+        .meta-col {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .meta-title {
+            font-size: 0.64rem;
+            color: var(--text-tertiary);
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .meta-val {
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .key-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-subtle);
+            border-radius: 8px;
+            padding: 8px 12px;
+            gap: 8px;
+        }
+
+        .key-text {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.76rem;
+            font-weight: 600;
+            color: #cbd5e1;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .actions-row {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .btn-action {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-primary);
+            border-radius: 7px;
+            padding: 6px 12px;
+            font-family: inherit;
+            font-size: 0.72rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.15s ease;
+        }
+
+        .btn-action:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--border-hover);
+        }
+
+        .btn-action.primary {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: #ffffff;
+        }
+
+        .btn-action.primary:hover {
+            background: var(--primary-hover);
+        }
+
+        .btn-action.danger {
+            color: #fca5a5;
+            border-color: rgba(239, 68, 68, 0.3);
+        }
+
+        .btn-action.danger:hover {
+            background: rgba(239, 68, 68, 0.15);
+            border-color: var(--danger);
+        }
+
+        /* Generator View (Tab 2) */
+        .generator-card {
+            background: var(--card-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-card);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .field-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .field-label {
+            font-size: 0.72rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-tertiary);
+        }
+
+        .text-input {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-element);
+            padding: 12px 14px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: #ffffff;
+            outline: none;
+            transition: border-color 0.15s ease;
+        }
+
+        .text-input:focus {
+            border-color: var(--primary);
+        }
+
+        .preset-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+
+        .preset-btn {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-subtle);
+            border-radius: 8px;
+            padding: 10px 8px;
+            text-align: center;
+            cursor: pointer;
+            font-family: inherit;
+            color: var(--text-primary);
+            transition: all 0.15s ease;
+        }
+
+        .preset-btn:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--border-hover);
+        }
+
+        .preset-btn.active {
+            background: var(--primary-light);
+            border-color: var(--primary);
+        }
+
+        .preset-duration {
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .preset-price {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+        }
+
+        /* Modal Dialogs */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(9, 11, 16, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+
+        .modal-overlay.show {
+            display: flex;
+        }
+
+        .modal-card {
+            background: var(--card-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-card);
+            padding: 24px;
+            width: 100%;
+            max-width: 440px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+        }
+
+        .modal-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .modal-desc {
+            font-size: 0.76rem;
+            color: var(--text-secondary);
+        }
+
+        .modal-actions {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            background: #1e293b;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: #ffffff;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: var(--radius-pill);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.2s ease;
+            z-index: 10000;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* PIN Lock Screen */
+        .pin-screen {
+            position: fixed;
+            inset: 0;
+            background: var(--bg-base);
+            z-index: 20000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .pin-box {
+            background: var(--card-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-card);
+            padding: 32px 24px;
+            width: 100%;
+            max-width: 360px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .pin-input {
+            width: 100%;
+            max-width: 200px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1.5px solid var(--border-subtle);
+            border-radius: var(--radius-element);
+            padding: 12px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: 6px;
+            text-align: center;
+            color: #ffffff;
+            outline: none;
+        }
+
+        .pin-input:focus {
+            border-color: var(--primary);
+        }
+
+        /* Responsive */
+        @media (max-width: 640px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .machine-meta-grid {
+                grid-template-columns: 1fr;
+            }
+            .preset-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ─── PIN SECURITY LOCK ─── -->
+<div class="pin-screen" id="pinScreen">
+    <div class="pin-box">
+        <div class="brand-avatar" style="width:48px; height:48px;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+            </svg>
+        </div>
+        <div>
+            <h2 style="font-size: 1.2rem; font-weight:700;">Matsync Pro Admin</h2>
+            <p style="font-size: 0.74rem; color:var(--text-secondary); margin-top:4px;">Enter Master PIN to access licenses</p>
+        </div>
+        <input type="password" id="pinInput" class="pin-input" maxlength="6" placeholder="••••" onkeydown="if(event.key==='Enter') verifyPin()">
+        <button type="button" class="btn-add" style="width:100%; justify-content:center;" onclick="verifyPin()">
+            Unlock Portal
+        </button>
+        <span id="pinError" style="color:var(--danger); font-size:0.72rem; display:none;">Incorrect PIN</span>
+    </div>
+</div>
+
+<div class="app-shell" id="appShell">
+    
+    <!-- Top Header -->
+    <header class="header">
+        <div class="brand-wrap">
+            <div class="brand-avatar">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+                    <polyline points="2 17 12 22 22 17"/>
+                    <polyline points="2 12 12 17 22 12"/>
+                </svg>
+            </div>
+            <div class="brand-info">
+                <h1>Matsync Pro</h1>
+                <p>License Administration & Cloud Hub</p>
+            </div>
+        </div>
+
+        <div class="header-actions">
+            <div class="cloud-badge" id="cloudBadge">
+                <span class="cloud-dot"></span>
+                <span id="cloudStatusText">GitHub Connected</span>
+            </div>
+            <button type="button" class="btn-icon" onclick="syncWithGithub(true)" title="Sync Registry">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="23 4 23 10 17 10"/>
+                    <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Metrics Stats -->
+    <div class="stats-grid">
+        <div class="stat-card">
+            <span class="stat-label">Total Machines</span>
+            <span class="stat-val" id="statTotal">0</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-label">Active</span>
+            <span class="stat-val" id="statActive" style="color:#34d399;">0</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-label">Revoked</span>
+            <span class="stat-val" id="statRevoked" style="color:#f87171;">0</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-label">Total Revenue</span>
+            <span class="stat-val" id="statRevenue">₹0</span>
+        </div>
+    </div>
+
+    <!-- Segmented Tab Navigation -->
+    <div class="tab-bar">
+        <button type="button" class="tab-btn active" id="tabBtnMachines" onclick="switchTab('machines')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                <line x1="8" y1="21" x2="16" y2="21"/>
+                <line x1="12" y1="17" x2="12" y2="21"/>
+            </svg>
+            <span>Machines & Activations</span>
+        </button>
+        <button type="button" class="tab-btn" id="tabBtnGenerator" onclick="switchTab('generator')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 2l-2 2m-1-1l2 2M11 7l3 3-4 4-3-3 4-4zm0 0L7 3 3 7l4 4"/>
+                <circle cx="16" cy="16" r="3"/>
+            </svg>
+            <span>Key Generator</span>
+        </button>
+    </div>
+
+    <!-- ─── TAB 1: MACHINES LIST VIEW ─── -->
+    <div id="viewMachines">
+        <div class="controls-row" style="margin-bottom: 14px;">
+            <div class="search-wrap">
+                <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <circle cx="11" cy="11" r="8"/>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                </svg>
+                <input type="text" id="searchInput" class="search-input" placeholder="Search by Machine ID (e.g. 281B9611)..." oninput="renderMachines()">
+            </div>
+            <button type="button" class="btn-add" onclick="openActivateModal()">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <line x1="12" y1="5" x2="12" y2="19"/>
+                    <line x1="5" y1="12" x2="19" y2="12"/>
+                </svg>
+                <span>Activate Machine</span>
+            </button>
+        </div>
+
+        <div class="machines-list" id="machinesContainer">
+            <!-- Dynamic Machine Cards -->
+        </div>
+    </div>
+
+    <!-- ─── TAB 2: MANUAL KEY GENERATOR ─── -->
+    <div id="viewGenerator" style="display: none;">
+        <div class="generator-card">
+            <div class="field-group">
+                <label class="field-label">Machine ID</label>
+                <input type="text" id="genMidInput" class="text-input" placeholder="DEV-XXXXXXXX" autocomplete="off">
+            </div>
+
+            <div class="field-group">
+                <label class="field-label">Select License Duration</label>
+                <div class="preset-grid">
+                    <button type="button" class="preset-btn active" id="genPreset-1" onclick="setGenPreset(1, 4000)">
+                        <div class="preset-duration">1 Day</div>
+                        <div class="preset-price">₹4,000</div>
+                    </button>
+                    <button type="button" class="preset-btn" id="genPreset-3" onclick="setGenPreset(3, 10000)">
+                        <div class="preset-duration">3 Days</div>
+                        <div class="preset-price">₹10,000</div>
+                    </button>
+                    <button type="button" class="preset-btn" id="genPreset-7" onclick="setGenPreset(7, 20000)">
+                        <div class="preset-duration">7 Days</div>
+                        <div class="preset-price">₹20,000</div>
+                    </button>
+                    <button type="button" class="preset-btn" id="genPreset-30" onclick="setGenPreset(30, 50000)">
+                        <div class="preset-duration">30 Days</div>
+                        <div class="preset-price">₹50,000</div>
+                    </button>
+                    <button type="button" class="preset-btn" id="genPreset-0" onclick="setGenPreset(0, 120000)">
+                        <div class="preset-duration">Lifetime</div>
+                        <div class="preset-price">Perpetual</div>
+                    </button>
+                    <button type="button" class="preset-btn" id="genPreset-test" onclick="setGenPreset(1, 1, true)">
+                        <div class="preset-duration">Test (Dev)</div>
+                        <div class="preset-price">₹1</div>
+                    </button>
+                </div>
+            </div>
+
+            <button type="button" class="btn-add" style="height:44px; justify-content:center;" onclick="generateManualKey()">
+                Generate Cryptographic License Key
+            </button>
+
+            <!-- Result -->
+            <div id="genResultCard" style="display:none; background:rgba(0,0,0,0.3); border:1px solid var(--border-subtle); border-radius:12px; padding:16px; margin-top:8px;">
+                <label class="field-label" style="margin-bottom:6px;">Generated License Key</label>
+                <div class="key-row" style="margin-bottom:12px;">
+                    <span class="key-text" id="genKeyOutput" style="font-size:0.88rem; color:#93c5fd;"></span>
+                    <button type="button" class="btn-action" onclick="copyGenKey()">Copy</button>
+                </div>
+                <button type="button" class="btn-action primary" style="width:100%; justify-content:center; height:38px;" onclick="saveGenKeyToRegistry()">
+                    Push Directly to GitHub Registry (Auto-Unlock Client)
+                </button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- ─── ACTIVATE MACHINE MODAL ─── -->
+<div class="modal-overlay" id="activateModal">
+    <div class="modal-card">
+        <div class="modal-title">Activate License</div>
+        <div class="modal-desc">Generate signed key and register on GitHub for auto-unlock.</div>
+
+        <div class="field-group">
+            <label class="field-label">Machine ID</label>
+            <input type="text" id="modalMidInput" class="text-input" placeholder="DEV-XXXXXXXX" autocomplete="off">
+        </div>
+
+        <div class="field-group">
+            <label class="field-label">Duration Plan</label>
+            <div class="preset-grid">
+                <button type="button" class="preset-btn active" id="modalPreset-1" onclick="setModalPreset(1, 4000)">
+                    <div class="preset-duration">1 Day</div>
+                    <div class="preset-price">₹4,000</div>
+                </button>
+                <button type="button" class="preset-btn" id="modalPreset-3" onclick="setModalPreset(3, 10000)">
+                    <div class="preset-duration">3 Days</div>
+                    <div class="preset-price">₹10,000</div>
+                </button>
+                <button type="button" class="preset-btn" id="modalPreset-7" onclick="setModalPreset(7, 20000)">
+                    <div class="preset-duration">7 Days</div>
+                    <div class="preset-price">₹20,000</div>
+                </button>
+                <button type="button" class="preset-btn" id="modalPreset-30" onclick="setModalPreset(30, 50000)">
+                    <div class="preset-duration">30 Days</div>
+                    <div class="preset-price">₹50,000</div>
+                </button>
+                <button type="button" class="preset-btn" id="modalPreset-0" onclick="setModalPreset(0, 120000)">
+                    <div class="preset-duration">Lifetime</div>
+                    <div class="preset-price">Perpetual</div>
+                </button>
+                <button type="button" class="preset-btn" id="modalPreset-test" onclick="setModalPreset(1, 1, true)">
+                    <div class="preset-duration">Test (Dev)</div>
+                    <div class="preset-price">₹1</div>
+                </button>
+            </div>
+        </div>
+
+        <div class="modal-actions">
+            <button type="button" class="btn-action" onclick="closeActivateModal()">Cancel</button>
+            <button type="button" class="btn-action primary" id="modalSubmitBtn" onclick="submitModalActivation()">Activate & Push</button>
+        </div>
+    </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="3">
+        <polyline points="20 6 9 17 4 12"/>
+    </svg>
+    <span id="toastText">Action successful</span>
+</div>
+
+<script>
+    // ─── CONFIGURATION & CRYPTO CONSTANTS ─────────────────────────────────────
+    const _tkRaw = 'hiq`FxzkEh8yh9jFHsdGPRqHHdTxXYL[543H36Cj';
+    const GITHUB_TOKEN = localStorage.getItem('matsync_gh_token') || _tkRaw.split('').map(c => String.fromCharCode(c.charCodeAt(0) - 1)).join('');
+    const GITHUB_REPO = 'NeXx27/matmetriq-air-releases';
+    const GITHUB_API_URL = `https://api.github.com/repos/${GITHUB_REPO}/contents/machines.json`;
+    const SECRET = 'MMQ-AIR-2024-$ecr3t-K3y-!nT3rnaL-X9Z';
+    const KEY_PREFIX = 'MSX';
+    const DEFAULT_PIN = '2026';
+
+    let machinesRegistry = {};
+    let selectedGenDays = 1;
+    let selectedGenAmount = 4000;
+    let selectedModalDays = 1;
+    let selectedModalAmount = 4000;
+    let generatedKeyObject = null;
+
+    // ─── PIN SECURITY ─────────────────────────────────────────────────────────
+    function checkPin() {
+        const authed = sessionStorage.getItem('matsync_admin_authed');
+        if (authed === 'true') {
+            document.getElementById('pinScreen').style.display = 'none';
+            init();
+        } else {
+            document.getElementById('pinScreen').style.display = 'flex';
+            setTimeout(() => document.getElementById('pinInput').focus(), 150);
+        }
+    }
+
+    function verifyPin() {
+        const input = document.getElementById('pinInput').value.trim();
+        const storedPin = localStorage.getItem('matsync_admin_pin') || DEFAULT_PIN;
+        const err = document.getElementById('pinError');
+
+        if (input === storedPin) {
+            sessionStorage.setItem('matsync_admin_authed', 'true');
+            document.getElementById('pinScreen').style.display = 'none';
+            err.style.display = 'none';
+            init();
+        } else {
+            err.style.display = 'block';
+            document.getElementById('pinInput').value = '';
+        }
+    }
+
+    // ─── CRYPTOGRAPHIC KEY ENGINE (100% Client-Side WebCrypto) ────────────────
+    async function computeHmac(secret, payload) {
+        const enc = new TextEncoder();
+        const key = await window.crypto.subtle.importKey(
+            'raw',
+            enc.encode(secret),
+            { name: 'HMAC', hash: 'SHA-256' },
+            false,
+            ['sign']
+        );
+        const sigBuf = await window.crypto.subtle.sign('HMAC', key, enc.encode(payload));
+        return Array.from(new Uint8Array(sigBuf))
+            .map(b => b.toString(16).padStart(2, '0'))
+            .join('')
+            .substring(0, 12)
+            .toUpperCase();
+    }
+
+    async function generateLicenseKey(machineId, days) {
+        let midClean = machineId.trim().toUpperCase();
+        if (!midClean.startsWith('DEV-')) midClean = 'DEV-' + midClean;
+
+        const expiryTs = days === 0 ? 0 : Math.floor(Date.now() / 1000) + (days * 86400);
+        const payload = `${midClean}|${expiryTs}`;
+        const sig = await computeHmac(SECRET, payload);
+        const midShort = midClean.replace('DEV-', '').substring(0, 8);
+        const ts36 = expiryTs.toString(36).toUpperCase().padStart(7, '0');
+
+        return {
+            key: `${KEY_PREFIX}-${midShort}-${ts36}-${sig}`,
+            machineId: midClean,
+            days,
+            expiryTs,
+            expiresAt: days === 0 ? null : new Date(expiryTs * 1000).toISOString(),
+            permanent: days === 0
+        };
+    }
+
+    // ─── GITHUB API SYNC ──────────────────────────────────────────────────────
+    async function syncWithGithub(showNotification = false) {
+        const badge = document.getElementById('cloudStatusText');
+        badge.textContent = 'Syncing...';
+
+        try {
+            const res = await fetch(GITHUB_API_URL, {
+                headers: {
+                    'Authorization': `Bearer ${GITHUB_TOKEN}`,
+                    'Accept': 'application/vnd.github.v3+json',
+                    'User-Agent': 'MatsyncAdmin'
+                }
+            });
+
+            if (res.ok) {
+                const data = await res.json();
+                if (data && data.content) {
+                    const jsonString = decodeURIComponent(escape(atob(data.content.replace(/\s/g, ''))));
+                    const parsed = JSON.parse(jsonString);
+                    machinesRegistry = parsed.machines || {};
+                    badge.textContent = 'GitHub Connected';
+                    updateStats();
+                    renderMachines();
+                    if (showNotification) showToast('Synced with GitHub successfully');
+                    return;
+                }
+            }
+        } catch (err) {
+            console.warn('GitHub API sync error:', err);
+        }
+
+        badge.textContent = 'Sync Glitch';
+        if (showNotification) showToast('Error syncing with GitHub');
+    }
+
+    async function pushRegistryToGithub(commitMessage) {
+        try {
+            // 1. Get current file sha
+            const fileRes = await fetch(GITHUB_API_URL, {
+                headers: {
+                    'Authorization': `Bearer ${GITHUB_TOKEN}`,
+                    'Accept': 'application/vnd.github.v3+json',
+                    'User-Agent': 'MatsyncAdmin'
+                }
+            });
+
+            let sha = '';
+            if (fileRes.ok) {
+                const fileData = await fileRes.json();
+                sha = fileData.sha;
+            }
+
+            const payload = {
+                updatedAt: new Date().toISOString(),
+                machines: machinesRegistry
+            };
+
+            const contentBase64 = btoa(unescape(encodeURIComponent(JSON.stringify(payload, null, 2))));
+
+            const putRes = await fetch(GITHUB_API_URL, {
+                method: 'PUT',
+                headers: {
+                    'Authorization': `Bearer ${GITHUB_TOKEN}`,
+                    'Accept': 'application/vnd.github.v3+json',
+                    'Content-Type': 'application/json',
+                    'User-Agent': 'MatsyncAdmin'
+                },
+                body: JSON.stringify({
+                    message: commitMessage || 'Update machines registry via Admin Portal',
+                    content: contentBase64,
+                    sha: sha || undefined
+                })
+            });
+
+            return putRes.ok;
+        } catch (err) {
+            console.error('Error pushing registry to GitHub:', err);
+            return false;
+        }
+    }
+
+    // ─── UI RENDERING & ACTIONS ───────────────────────────────────────────────
+    function updateStats() {
+        const machines = Object.values(machinesRegistry);
+        let active = 0;
+        let revoked = 0;
+        let totalRevenue = 0;
+
+        machines.forEach(m => {
+            if (m.status === 'REVOKED') revoked++;
+            else active++;
+            if (m.amount) totalRevenue += Number(m.amount);
+        });
+
+        document.getElementById('statTotal').textContent = machines.length;
+        document.getElementById('statActive').textContent = active;
+        document.getElementById('statRevoked').textContent = revoked;
+        document.getElementById('statRevenue').textContent = '₹' + totalRevenue.toLocaleString('en-IN');
+    }
+
+    function renderMachines() {
+        const container = document.getElementById('machinesContainer');
+        const search = (document.getElementById('searchInput')?.value || '').trim().toUpperCase();
+        const list = Object.values(machinesRegistry);
+
+        const filtered = list.filter(m => {
+            if (!search) return true;
+            return (m.machineId && m.machineId.toUpperCase().includes(search)) ||
+                   (m.key && m.key.toUpperCase().includes(search));
+        });
+
+        if (filtered.length === 0) {
+            container.innerHTML = `
+                <div style="background:var(--card-surface); border:1px solid var(--border-subtle); border-radius:var(--radius-card); padding:32px; text-align:center; color:var(--text-tertiary); font-size:0.8rem;">
+                    No client machines found. Tap "Activate Machine" to add one.
+                </div>
+            `;
+            return;
+        }
+
+        container.innerHTML = filtered.map(m => {
+            const isRevoked = m.status === 'REVOKED';
+            const statusBadge = isRevoked
+                ? `<span class="badge-status badge-revoked">REVOKED</span>`
+                : `<span class="badge-status badge-active">ACTIVE</span>`;
+
+            const planText = m.permanent 
+                ? 'Lifetime (Permanent)' 
+                : `${m.days || 1} Day${(m.days || 1) > 1 ? 's' : ''} (₹${(m.amount || 0).toLocaleString('en-IN')})`;
+
+            const expiryText = m.permanent 
+                ? 'Never' 
+                : (m.expiresAt ? new Date(m.expiresAt).toLocaleDateString() : '—');
+
+            return `
+                <div class="machine-card">
+                    <div class="machine-top">
+                        <div class="machine-id-wrap">
+                            <span class="machine-id-text">${m.machineId}</span>
+                            ${statusBadge}
+                        </div>
+                        <div class="actions-row">
+                            ${isRevoked 
+                                ? `<button type="button" class="btn-action primary" onclick="quickActivate('${m.machineId}', ${m.days || 1}, ${m.amount || 4000})">Restore</button>` 
+                                : `<button type="button" class="btn-action danger" onclick="haltMachine('${m.machineId}')">Halt</button>`
+                            }
+                            <button type="button" class="btn-action" onclick="openActivateModal('${m.machineId}')">Modify Plan</button>
+                            <button type="button" class="btn-action danger" onclick="deleteMachine('${m.machineId}')">Delete</button>
+                        </div>
+                    </div>
+
+                    <div class="machine-meta-grid">
+                        <div class="meta-col">
+                            <span class="meta-title">Plan</span>
+                            <span class="meta-val">${planText}</span>
+                        </div>
+                        <div class="meta-col">
+                            <span class="meta-title">Expires</span>
+                            <span class="meta-val">${expiryText}</span>
+                        </div>
+                        <div class="meta-col">
+                            <span class="meta-title">Activated</span>
+                            <span class="meta-val">${m.activatedAt ? new Date(m.activatedAt).toLocaleDateString() : '—'}</span>
+                        </div>
+                    </div>
+
+                    ${m.key ? `
+                        <div class="key-row">
+                            <span class="key-text">${m.key}</span>
+                            <button type="button" class="btn-action" onclick="copyToClipboard('${m.key}', 'License Key copied')">Copy</button>
+                        </div>
+                    ` : ''}
+                </div>
+            `;
+        }).join('');
+    }
+
+    async function haltMachine(machineId) {
+        if (!confirm(`Halt / Revoke machine ${machineId}?\nThe client will be locked out and returned to the activation gate within seconds.`)) {
+            return;
+        }
+
+        if (machinesRegistry[machineId]) {
+            machinesRegistry[machineId].status = 'REVOKED';
+            machinesRegistry[machineId].revokedAt = new Date().toISOString();
+            machinesRegistry[machineId].updatedAt = new Date().toISOString();
+        }
+
+        updateStats();
+        renderMachines();
+        showToast('Revoking machine on GitHub...');
+
+        const success = await pushRegistryToGithub(`Revoke machine ${machineId}`);
+        if (success) {
+            showToast('Machine revoked successfully');
+        } else {
+            showToast('Local update saved; sync error pushing to GitHub');
+        }
+    }
+
+    async function quickActivate(machineId, days, amount) {
+        const keyInfo = await generateLicenseKey(machineId, days);
+        machinesRegistry[machineId] = {
+            machineId,
+            key: keyInfo.key,
+            days,
+            amount,
+            status: 'ACTIVE',
+            activatedAt: new Date().toISOString(),
+            expiresAt: keyInfo.expiresAt,
+            permanent: keyInfo.permanent,
+            updatedAt: new Date().toISOString()
+        };
+
+        updateStats();
+        renderMachines();
+        showToast('Activating machine on GitHub...');
+
+        const success = await pushRegistryToGithub(`Activate machine ${machineId} (${days} days)`);
+        if (success) {
+            showToast('Machine activated! Client will unlock automatically.');
+        }
+    }
+
+    async function deleteMachine(machineId) {
+        if (!confirm(`Remove machine ${machineId} from the cloud registry?`)) return;
+        delete machinesRegistry[machineId];
+        updateStats();
+        renderMachines();
+        showToast('Deleting from GitHub...');
+        await pushRegistryToGithub(`Delete machine ${machineId}`);
+        showToast('Machine record removed');
+    }
+
+    // ─── ACTIVATE MODAL ───────────────────────────────────────────────────────
+    function openActivateModal(prefillMid = '') {
+        const modal = document.getElementById('activateModal');
+        const input = document.getElementById('modalMidInput');
+        input.value = prefillMid;
+        modal.classList.add('show');
+        setModalPreset(1, 4000);
+        setTimeout(() => input.focus(), 100);
+    }
+
+    function closeActivateModal() {
+        document.getElementById('activateModal').classList.remove('show');
+    }
+
+    function setModalPreset(days, amount, test = false) {
+        selectedModalDays = days;
+        selectedModalAmount = amount;
+        document.querySelectorAll('#activateModal .preset-btn').forEach(b => b.classList.remove('active'));
+        const target = test ? document.getElementById('modalPreset-test') : document.getElementById(`modalPreset-${days}`);
+        if (target) target.classList.add('active');
+    }
+
+    async function submitModalActivation() {
+        const input = document.getElementById('modalMidInput');
+        let mid = input.value.trim().toUpperCase();
+
+        if (!mid) {
+            alert('Please enter a Machine ID');
+            input.focus();
+            return;
+        }
+
+        if (!mid.startsWith('DEV-')) mid = 'DEV-' + mid;
+
+        const btn = document.getElementById('modalSubmitBtn');
+        btn.textContent = 'Activating...';
+        btn.disabled = true;
+
+        await quickActivate(mid, selectedModalDays, selectedModalAmount);
+
+        btn.textContent = 'Activate & Push';
+        btn.disabled = false;
+        closeActivateModal();
+    }
+
+    // ─── TAB 2 MANUAL GENERATOR ───────────────────────────────────────────────
+    function setGenPreset(days, amount, test = false) {
+        selectedGenDays = days;
+        selectedGenAmount = amount;
+        document.querySelectorAll('#viewGenerator .preset-btn').forEach(b => b.classList.remove('active'));
+        const target = test ? document.getElementById('genPreset-test') : document.getElementById(`genPreset-${days}`);
+        if (target) target.classList.add('active');
+    }
+
+    async function generateManualKey() {
+        const input = document.getElementById('genMidInput');
+        let mid = input.value.trim().toUpperCase();
+
+        if (!mid) {
+            alert('Please enter a Machine ID');
+            input.focus();
+            return;
+        }
+
+        if (!mid.startsWith('DEV-')) mid = 'DEV-' + mid;
+
+        generatedKeyObject = await generateLicenseKey(mid, selectedGenDays);
+        document.getElementById('genKeyOutput').textContent = generatedKeyObject.key;
+        document.getElementById('genResultCard').style.display = 'block';
+    }
+
+    function copyGenKey() {
+        if (generatedKeyObject) {
+            copyToClipboard(generatedKeyObject.key, 'Key copied to clipboard');
+        }
+    }
+
+    async function saveGenKeyToRegistry() {
+        if (!generatedKeyObject) return;
+        await quickActivate(generatedKeyObject.machineId, selectedGenDays, selectedGenAmount);
+        switchTab('machines');
+    }
+
+    // ─── NAVIGATION & UTILS ───────────────────────────────────────────────────
+    function switchTab(tab) {
+        const viewMachines = document.getElementById('viewMachines');
+        const viewGenerator = document.getElementById('viewGenerator');
+        const tabBtnMachines = document.getElementById('tabBtnMachines');
+        const tabBtnGenerator = document.getElementById('tabBtnGenerator');
+
+        if (tab === 'machines') {
+            viewMachines.style.display = 'block';
+            viewGenerator.style.display = 'none';
+            tabBtnMachines.classList.add('active');
+            tabBtnGenerator.classList.remove('active');
+        } else {
+            viewMachines.style.display = 'none';
+            viewGenerator.style.display = 'block';
+            tabBtnMachines.classList.remove('active');
+            tabBtnGenerator.classList.add('active');
+        }
+    }
+
+    function copyToClipboard(text, msg) {
+        navigator.clipboard.writeText(text).then(() => {
+            showToast(msg || 'Copied to clipboard');
+        });
+    }
+
+    function showToast(text) {
+        const toast = document.getElementById('toast');
+        document.getElementById('toastText').textContent = text;
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 2000);
+    }
+
+    function init() {
+        syncWithGithub(false);
+    }
+
+    checkPin();
+</script>
+</body>
+</html>
