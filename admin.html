@@ -1012,49 +1012,73 @@
     }
 
     async function pushRegistryToGithub(commitMessage) {
-        try {
-            // 1. Get current file sha
-            const fileRes = await fetch(GITHUB_API_URL, {
-                headers: {
-                    'Authorization': `Bearer ${GITHUB_TOKEN}`,
-                    'Accept': 'application/vnd.github.v3+json',
-                    'User-Agent': 'MatsyncAdmin'
+        for (let attempt = 0; attempt < 2; attempt++) {
+            try {
+                // 1. Get fresh file SHA and latest remote machines
+                const fileRes = await fetch(`${GITHUB_API_URL}?t=${Date.now()}`, {
+                    headers: {
+                        'Authorization': `Bearer ${GITHUB_TOKEN}`,
+                        'Accept': 'application/vnd.github.v3+json',
+                        'User-Agent': 'MatsyncAdmin'
+                    },
+                    cache: 'no-store'
+                });
+
+                let sha = '';
+                if (fileRes.ok) {
+                    const fileData = await fileRes.json();
+                    sha = fileData.sha;
+                    if (fileData.content) {
+                        try {
+                            const raw = decodeURIComponent(escape(atob(fileData.content.replace(/\s/g, ''))));
+                            const parsed = JSON.parse(raw);
+                            if (parsed.machines) {
+                                // Merge machines so no machine is lost
+                                Object.keys(parsed.machines).forEach(k => {
+                                    if (!machinesRegistry[k]) {
+                                        machinesRegistry[k] = parsed.machines[k];
+                                    }
+                                });
+                            }
+                        } catch(e) {}
+                    }
                 }
-            });
 
-            let sha = '';
-            if (fileRes.ok) {
-                const fileData = await fileRes.json();
-                sha = fileData.sha;
+                const payload = {
+                    updatedAt: new Date().toISOString(),
+                    machines: machinesRegistry
+                };
+
+                const contentBase64 = btoa(unescape(encodeURIComponent(JSON.stringify(payload, null, 2))));
+
+                const putRes = await fetch(GITHUB_API_URL, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `Bearer ${GITHUB_TOKEN}`,
+                        'Accept': 'application/vnd.github.v3+json',
+                        'Content-Type': 'application/json',
+                        'User-Agent': 'MatsyncAdmin'
+                    },
+                    body: JSON.stringify({
+                        message: commitMessage || 'Update machines registry via Admin Portal',
+                        content: contentBase64,
+                        sha: sha || undefined
+                    })
+                });
+
+                if (putRes.ok) {
+                    return true;
+                } else if (putRes.status === 409) {
+                    // Retry on SHA collision
+                    continue;
+                } else {
+                    console.error('GitHub PUT failed with status:', putRes.status);
+                }
+            } catch (err) {
+                console.error('Error pushing registry to GitHub:', err);
             }
-
-            const payload = {
-                updatedAt: new Date().toISOString(),
-                machines: machinesRegistry
-            };
-
-            const contentBase64 = btoa(unescape(encodeURIComponent(JSON.stringify(payload, null, 2))));
-
-            const putRes = await fetch(GITHUB_API_URL, {
-                method: 'PUT',
-                headers: {
-                    'Authorization': `Bearer ${GITHUB_TOKEN}`,
-                    'Accept': 'application/vnd.github.v3+json',
-                    'Content-Type': 'application/json',
-                    'User-Agent': 'MatsyncAdmin'
-                },
-                body: JSON.stringify({
-                    message: commitMessage || 'Update machines registry via Admin Portal',
-                    content: contentBase64,
-                    sha: sha || undefined
-                })
-            });
-
-            return putRes.ok;
-        } catch (err) {
-            console.error('Error pushing registry to GitHub:', err);
-            return false;
         }
+        return false;
     }
 
     // ─── UI RENDERING & ACTIONS ───────────────────────────────────────────────
