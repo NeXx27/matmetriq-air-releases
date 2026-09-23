@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-23T20:17:19.092Z",
+  "updatedAt": "2026-09-23T20:17:19.116Z",
   "machines": {
     "DEV-281B961167D2A341": {
       "machineId": "DEV-281B961167D2A341",
@@ -14,17 +14,14 @@
     },
     "DEV-BADF514CB8532AA8": {
       "machineId": "DEV-BADF514CB8532AA8",
-      "key": "MSX-BADF514C-0TLVXND-6DB234CDD1A8",
+      "key": "MSX-BADF514C-0TLVXOU-B74211606ABE",
       "days": 1,
       "amount": 1,
-      "status": "REVOKED",
-      "activatedAt": "2026-09-23T20:16:26.000Z",
-      "expiresAt": "2026-09-24T20:16:25.000Z",
+      "status": "ACTIVE",
+      "activatedAt": "2026-09-23T20:17:18.710Z",
+      "expiresAt": "2026-09-24T20:17:18.000Z",
       "permanent": false,
-      "updatedAt": "2026-09-23T20:16:40.199Z",
-      "revokedAt": "2026-09-23T20:16:40.199Z",
-      "lastSeen": "2026-09-23T20:17:18.755Z",
-      "appVersion": "1.2.4"
+      "updatedAt": "2026-09-23T20:17:18.710Z"
     }
   }
 }
