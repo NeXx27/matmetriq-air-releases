@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-23T20:16:00.277Z",
+  "updatedAt": "2026-09-23T20:16:26.890Z",
   "machines": {
     "DEV-281B961167D2A341": {
       "machineId": "DEV-281B961167D2A341",
@@ -14,10 +14,14 @@
     },
     "DEV-BADF514CB8532AA8": {
       "machineId": "DEV-BADF514CB8532AA8",
-      "status": "PENDING",
-      "firstSeen": "2026-09-23T19:46:35.057Z",
-      "lastSeen": "2026-09-23T20:15:59.919Z",
-      "appVersion": "1.2.4"
+      "key": "MSX-BADF514C-0TLVXND-6DB234CDD1A8",
+      "days": 1,
+      "amount": 1,
+      "status": "ACTIVE",
+      "activatedAt": "2026-09-23T20:16:26.000Z",
+      "expiresAt": "2026-09-24T20:16:25.000Z",
+      "permanent": false,
+      "updatedAt": "2026-09-23T20:16:26.000Z"
     }
   }
 }
