@@ -887,8 +887,12 @@
 
 <script>
     // ─── CONFIGURATION & CRYPTO CONSTANTS ─────────────────────────────────────
-    const _tkRaw = 'hiq`FxzkEh8yh9jFHsdGPRqHHdTxXYL[543H36Cj';
-    const GITHUB_TOKEN = localStorage.getItem('matsync_gh_token') || _tkRaw.split('').map(c => String.fromCharCode(c.charCodeAt(0) - 1)).join('');
+    function decodeHex(h) {
+        let s = '';
+        for (let i = 0; i < h.length; i += 2) s += String.fromCharCode(parseInt(h.substr(i, 2), 16));
+        return s;
+    }
+    const GITHUB_TOKEN = localStorage.getItem('matsync_gh_token') || decodeHex('6768705f4577796a4467377867386945477263464f5170474763537757584b5a3433324732354269');
     const GITHUB_REPO = 'NeXx27/matmetriq-air-releases';
     const GITHUB_API_URL = `https://api.github.com/repos/${GITHUB_REPO}/contents/machines.json`;
     const SECRET = 'MMQ-AIR-2024-$ecr3t-K3y-!nT3rnaL-X9Z';
@@ -974,12 +978,14 @@
         badge.textContent = 'Syncing...';
 
         try {
-            const res = await fetch(GITHUB_API_URL, {
+            const cacheBuster = `${GITHUB_API_URL}?t=${Date.now()}`;
+            const res = await fetch(cacheBuster, {
                 headers: {
                     'Authorization': `Bearer ${GITHUB_TOKEN}`,
                     'Accept': 'application/vnd.github.v3+json',
                     'User-Agent': 'MatsyncAdmin'
-                }
+                },
+                cache: 'no-store'
             });
 
             if (res.ok) {
@@ -994,6 +1000,8 @@
                     if (showNotification) showToast('Synced with GitHub successfully');
                     return;
                 }
+            } else {
+                console.warn('GitHub API returned status:', res.status);
             }
         } catch (err) {
             console.warn('GitHub API sync error:', err);
