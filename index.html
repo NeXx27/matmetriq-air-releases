@@ -1121,7 +1121,7 @@
 
                     <div class="machine-meta-grid">
                         <div class="meta-col">
-                            <span class="meta-title">Plan</span>
+                            <span class="meta-title">Current Plan</span>
                             <span class="meta-val">${planText}</span>
                         </div>
                         <div class="meta-col">
@@ -1132,6 +1132,16 @@
                             <span class="meta-title">Activated</span>
                             <span class="meta-val">${m.activatedAt ? new Date(m.activatedAt).toLocaleDateString() : '—'}</span>
                         </div>
+                    </div>
+
+                    <div class="quick-plans-bar" style="display:flex; align-items:center; gap:6px; flex-wrap:wrap; padding:8px 0 2px 0; border-top:1px solid rgba(255,255,255,0.06);">
+                        <span style="font-size:0.66rem; color:var(--text-tertiary); font-weight:700; text-transform:uppercase;">1-Tap Activate:</span>
+                        <button type="button" class="btn-action primary" onclick="quickActivate('${m.machineId}', 1, 4000)">1D (₹4k)</button>
+                        <button type="button" class="btn-action primary" onclick="quickActivate('${m.machineId}', 3, 10000)">3D (₹10k)</button>
+                        <button type="button" class="btn-action primary" onclick="quickActivate('${m.machineId}', 7, 20000)">7D (₹20k)</button>
+                        <button type="button" class="btn-action primary" onclick="quickActivate('${m.machineId}', 30, 50000)">30D (₹50k)</button>
+                        <button type="button" class="btn-action primary" onclick="quickActivate('${m.machineId}', 0, 120000)">Lifetime</button>
+                        <button type="button" class="btn-action" onclick="quickActivate('${m.machineId}', 1, 1)">Test ₹1</button>
                     </div>
 
                     ${m.key ? `
