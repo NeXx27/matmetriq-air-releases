@@ -1,4 +1,16 @@
 {
-  "updatedAt": "2026-09-23T09:40:00.000Z",
-  "machines": {}
+  "updatedAt": "2026-09-23T09:44:44.470Z",
+  "machines": {
+    "DEV-TEST999": {
+      "machineId": "DEV-TEST999",
+      "key": "MSX-TEST999-0TLV4EJ-EE0E4A9BF3D6",
+      "days": 1,
+      "amount": 1,
+      "status": "ACTIVE",
+      "activatedAt": "2026-09-23T09:44:44.470Z",
+      "expiresAt": "2026-09-24T09:44:43.000Z",
+      "permanent": false,
+      "updatedAt": "2026-09-23T09:44:44.470Z"
+    }
+  }
 }
