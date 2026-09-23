@@ -345,7 +345,7 @@
 
         .machine-meta-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
             gap: 8px;
             background: rgba(0, 0, 0, 0.2);
             border: 1px solid rgba(255, 255, 255, 0.04);
@@ -1100,6 +1100,25 @@
         document.getElementById('statRevenue').textContent = '₹' + totalRevenue.toLocaleString('en-IN');
     }
 
+    function formatLastSeen(isoStr) {
+        if (!isoStr) return '<span style="color:var(--text-tertiary);">Offline</span>';
+        const diff = Math.floor((Date.now() - new Date(isoStr).getTime()) / 1000);
+        if (diff < 180) {
+            return '<span style="color:#10b981; font-weight:700;">Online</span>';
+        }
+        if (diff < 3600) {
+            return `${Math.floor(diff / 60)}m ago`;
+        }
+        if (diff < 86400) {
+            return `${Math.floor(diff / 3600)}h ago`;
+        }
+        const days = Math.floor(diff / 86400);
+        if (days < 30) {
+            return `${days}d ago`;
+        }
+        return new Date(isoStr).toLocaleDateString([], { month: 'short', day: 'numeric' });
+    }
+
     function renderMachines() {
         const container = document.getElementById('machinesContainer');
         const search = (document.getElementById('searchInput')?.value || '').trim().toUpperCase();
@@ -1122,9 +1141,12 @@
 
         container.innerHTML = filtered.map(m => {
             const isRevoked = m.status === 'REVOKED';
+            const isPending = m.status === 'PENDING';
             const statusBadge = isRevoked
                 ? `<span class="badge-status badge-revoked">REVOKED</span>`
-                : `<span class="badge-status badge-active">ACTIVE</span>`;
+                : (isPending 
+                    ? `<span class="badge-status" style="background:rgba(234,179,8,0.12); color:#facc15; border:1px solid rgba(234,179,8,0.3);">PENDING</span>`
+                    : `<span class="badge-status badge-active">ACTIVE</span>`);
 
             const planText = m.permanent 
                 ? 'Lifetime (Permanent)' 
@@ -1163,6 +1185,10 @@
                         <div class="meta-col">
                             <span class="meta-title">Activated</span>
                             <span class="meta-val">${m.activatedAt ? new Date(m.activatedAt).toLocaleDateString() : '—'}</span>
+                        </div>
+                        <div class="meta-col">
+                            <span class="meta-title">Last Seen</span>
+                            <span class="meta-val">${formatLastSeen(m.lastSeen)}</span>
                         </div>
                     </div>
 
