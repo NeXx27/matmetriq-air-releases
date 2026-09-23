@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-23T20:17:53.727Z",
+  "updatedAt": "2026-09-23T20:18:36.201Z",
   "machines": {
     "DEV-281B961167D2A341": {
       "machineId": "DEV-281B961167D2A341",
@@ -22,7 +22,9 @@
       "expiresAt": "2026-09-24T20:17:18.000Z",
       "permanent": false,
       "updatedAt": "2026-09-23T20:17:53.347Z",
-      "revokedAt": "2026-09-23T20:17:53.347Z"
+      "revokedAt": "2026-09-23T20:17:53.347Z",
+      "lastSeen": "2026-09-23T20:18:35.867Z",
+      "appVersion": "1.2.4"
     }
   }
 }
