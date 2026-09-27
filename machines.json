@@ -1,16 +1,16 @@
 {
-  "updatedAt": "2026-09-27T11:41:58.833Z",
+  "updatedAt": "2026-09-27T14:08:04.023Z",
   "machines": {
     "DEV-281B961167D2A341": {
       "machineId": "DEV-281B961167D2A341",
-      "key": "MSX-281B9611-0TM2OHY-665D1E600E84",
+      "key": "MSX-281B9611-0TM2V9F-7A4C2F121FFA",
       "days": 1,
-      "amount": 4000,
+      "amount": 1,
       "status": "ACTIVE",
-      "activatedAt": "2026-09-27T11:41:58.206Z",
-      "expiresAt": "2026-09-28T11:41:58.000Z",
+      "activatedAt": "2026-09-27T14:08:03.137Z",
+      "expiresAt": "2026-09-28T14:08:03.000Z",
       "permanent": false,
-      "updatedAt": "2026-09-27T11:41:58.206Z"
+      "updatedAt": "2026-09-27T14:08:03.137Z"
     },
     "DEV-BADF514CB8532AA8": {
       "machineId": "DEV-BADF514CB8532AA8",
