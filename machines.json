@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-27T14:11:09.528Z",
+  "updatedAt": "2026-09-30T11:13:50.442Z",
   "machines": {
     "DEV-281B961167D2A341": {
       "machineId": "DEV-281B961167D2A341",
@@ -10,7 +10,9 @@
       "activatedAt": "2026-09-27T14:08:03.137Z",
       "expiresAt": "2026-09-28T14:08:03.000Z",
       "permanent": false,
-      "updatedAt": "2026-09-27T14:08:03.137Z"
+      "updatedAt": "2026-09-27T14:08:03.137Z",
+      "lastSeen": "2026-09-30T11:13:50.442Z",
+      "appVersion": "1.2.7"
     },
     "DEV-BADF514CB8532AA8": {
       "machineId": "DEV-BADF514CB8532AA8",
