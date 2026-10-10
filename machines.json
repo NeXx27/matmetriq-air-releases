@@ -1,18 +1,16 @@
 {
-  "updatedAt": "2026-10-07T05:13:11.875Z",
+  "updatedAt": "2026-10-10T11:53:42.361Z",
   "machines": {
     "DEV-281B961167D2A341": {
       "machineId": "DEV-281B961167D2A341",
-      "key": "MSX-281B9611-0TMDV8R-FEFBD812070C",
+      "key": "MSX-281B9611-0TMQRPH-F3A5DE55C340",
       "days": 1,
       "amount": 4000,
       "status": "ACTIVE",
-      "activatedAt": "2026-10-03T12:41:15.635Z",
-      "expiresAt": "2026-10-04T12:41:15.000Z",
+      "activatedAt": "2026-10-10T11:53:41.673Z",
+      "expiresAt": "2026-10-11T11:53:41.000Z",
       "permanent": false,
-      "updatedAt": "2026-10-03T12:41:15.635Z",
-      "lastSeen": "2026-10-07T05:13:11.875Z",
-      "appVersion": "1.3.0"
+      "updatedAt": "2026-10-10T11:53:41.673Z"
     },
     "DEV-BADF514CB8532AA8": {
       "machineId": "DEV-BADF514CB8532AA8",
